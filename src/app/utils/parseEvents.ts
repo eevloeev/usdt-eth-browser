@@ -9,7 +9,15 @@ interface Event extends EventLog {
   fee?: string
 }
 
+let isParsing = false
+
 const parseEvents = async () => {
+  if (isParsing) {
+    return
+  }
+
+  isParsing = true
+
   const eventsCollection = mongoClient.db("db").collection("events")
   const contract = new web3.eth.Contract(USDT_ETH.abi, USDT_ETH.address)
 
@@ -49,6 +57,8 @@ const parseEvents = async () => {
   eventsCollection.insertMany(events)
 
   console.log("processed " + events.length + " events")
+
+  isParsing = false
 }
 
 export { parseEvents }

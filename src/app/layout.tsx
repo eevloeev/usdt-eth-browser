@@ -1,3 +1,4 @@
+import { StoreProvider } from "@/components/StoreProvider"
 import "@fontsource/roboto/300.css"
 import "@fontsource/roboto/400.css"
 import "@fontsource/roboto/500.css"
@@ -16,7 +17,7 @@ export default function RootLayout(props: Props) {
     <html lang="en">
       <body>
         <CssBaseline />
-        <div>{children}</div>
+        <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
   )

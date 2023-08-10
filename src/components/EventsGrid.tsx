@@ -1,8 +1,9 @@
 "use client"
 
+import { fetchEvents } from "@/redux/slices/eventSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/store"
 import { Box, Button, Typography } from "@mui/material"
 import { DataGrid, GridColDef } from "@mui/x-data-grid"
-import { useState } from "react"
 
 const TABLE_PAGE_SIZE = 10
 
@@ -64,23 +65,11 @@ const columns: GridColDef[] = [
 ]
 
 const EventsGrid = () => {
-  const [events, setEvents] = useState([])
-  const [loading, setLoading] = useState(false)
+  const { all: events, loading } = useAppSelector((state) => state.events)
+  const dispatch = useAppDispatch()
 
-  const fetchEvents = async () => {
-    setLoading(true)
-    const response = await fetch("/api/v1/events")
-    const data = await response.json()
-    const events = data.events.map((event: any) => ({
-      ...event,
-      id: event._id,
-    }))
-    setEvents(events)
-    setLoading(false)
-  }
-
-  const handleClick = () => {
-    fetchEvents()
+  const handleClick = async () => {
+    await dispatch(fetchEvents())
   }
 
   return (

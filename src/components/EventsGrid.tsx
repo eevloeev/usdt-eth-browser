@@ -33,7 +33,6 @@ const columns: GridColDef[] = [
     headerName: "From",
     width: 180,
     valueGetter: (params) => {
-      console.log(params)
       return params.row?.returnValues?.from
     },
   },

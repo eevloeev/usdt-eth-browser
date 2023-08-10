@@ -6,7 +6,7 @@ import { PersistGate } from "redux-persist/integration/react"
 
 type Props = { children: React.ReactNode }
 
-export function StoreProvider(props: Props) {
+export function Providers(props: Props) {
   const { children } = props
 
   return (
